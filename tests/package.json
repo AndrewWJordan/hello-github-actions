@@ -1,0 +1,14 @@
+{
+  "name": "cypress-tests",
+  "version": "1.0.0",
+  "description": "a simple cypress setup with GH Actions",
+  "main": "index.js",
+  "scripts": {
+    "test": "cypress run"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "6.8.0"
+  }
+}
