@@ -1,5 +1,4 @@
 name: Run Cypress Test
-description: A simple Cypress GH Action
 on: push
 jobs:
   cypress-run:
