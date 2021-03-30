@@ -19,9 +19,8 @@ jobs:
           group: Recordings
           tag: action
           build: npx cypress info
-          run: npx cypress run --record --key eb660742-e519-4474-8c34-24149f3dca2a
         env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_ID }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Print Dashboard URL
