@@ -11,8 +11,6 @@ jobs:
       - name: Cypress tests
         uses: cypress-io/github-action@v2
         with:
-          browser: chrome
-          record: true
           working-directory: tests
           build: npx cypress info
         env:
