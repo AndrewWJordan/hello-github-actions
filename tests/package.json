@@ -1,7 +1,7 @@
 {
   "name": "cypress-tests",
   "version": "1.0.0",
-  "description": "an simple cypress setup with GH Actions",
+  "description": "a simple cypress setup with GH Actions",
   "main": "index.js",
   "scripts": {
     "test": "cypress run"
