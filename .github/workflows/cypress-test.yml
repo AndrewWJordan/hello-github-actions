@@ -13,7 +13,7 @@ jobs:
         with:
           browser: chrome
           record: true
-          working-directory: cypress/integration
+          working-directory: tests
           build: npx cypress info
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
