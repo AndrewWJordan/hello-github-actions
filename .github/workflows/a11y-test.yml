@@ -20,6 +20,7 @@ jobs:
         
         
       - name: Read pa11y_output file.
+        working-directory: a11y
         id: pa11y_output
         uses: juliangruber/read-file-action@v1
         with:
