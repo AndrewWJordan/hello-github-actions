@@ -9,7 +9,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name Cypress tests
+      - name: Cypress tests
         uses: cypress-io/github-action@v2
         with:
           browser: chrome
