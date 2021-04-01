@@ -29,7 +29,9 @@ jobs:
         if: github.event_name == 'pull_request'
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          message: "<details><summary>Pa11y testing results</summary>```${{ steps.pa11y_output.outputs.content }}```</details>"
+          script: |
+            const { issue: { number: issue_number }, repo: { owner, repo }  } = context;
+            github.issues.createComment({ issue_number, owner, repo, body: ${{ steps.pa11y_output.outputs.content }} });
 
       - name: Check for pa11y failures.
         if: contains(steps.pa11y_output.outputs.content, 'errno 2')
