@@ -24,22 +24,18 @@ jobs:
         with:
           path: a11y/pa11y_output.txt
 
-      - name: View context attributes
-        uses: actions/github-script@v3
-        with:
-          script: console.log(context)
-
       - name: Comment on pull request.
         if: contains(steps.pa11y_output.outputs.content, 'errno 2')
         uses: actions/github-script@v3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            console.log(steps.pa11y_output.outputs.content);
             github.issues.createComment({ 
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: "There are accessibility errors. Please review the pa11y-ci actions step in the workflow for a list of failures."
+              body: steps.pa11y_output.outputs.content
             })
 
       - name: Check for pa11y failures.
