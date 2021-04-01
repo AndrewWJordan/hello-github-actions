@@ -30,12 +30,11 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            console.log(steps.pa11y_output.outputs.content);
             github.issues.createComment({ 
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: steps.pa11y_output.outputs.content
+              body: "There are accessibility errors. Please review the pa11y-ci actions step in the workflow for a list of failures."
             })
 
       - name: Check for pa11y failures.
