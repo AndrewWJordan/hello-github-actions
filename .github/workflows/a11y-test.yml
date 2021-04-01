@@ -1,5 +1,5 @@
 name: pa11y tests
-on: [push]
+on: [pull_request]
 
 jobs:
   build:
@@ -25,14 +25,20 @@ jobs:
           path: a11y/pa11y_output.txt
 
       - name: Comment on pull request.
-        uses: actions/github-script@0.3.0
-        if: github.event_name == 'pull_request'
+        if: contains(steps.pa11y_output.outputs.content, 'errno 2')
+        uses: actions/github-script@v3
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          message: "<details><summary>Pa11y testing results</summary>```${{ steps.pa11y_output.outputs.content }}```</details>"
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.issues.createComment({ 
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: "There are accessibility errors. Please review the pa11y-ci actions step in the workflow for a list of failures."
+            })
 
       - name: Check for pa11y failures.
         if: contains(steps.pa11y_output.outputs.content, 'errno 2')
         run: |
-          echo "::error::The site is failing accessibility tests. Please review the comment in the pull request or the pa11y-ci step in the workflow for details."
+          echo "::error::The site is failing accessibility tests. Please review the pa11y-ci step in the workflow for details."
           exit 1
