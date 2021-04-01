@@ -30,7 +30,8 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const message = ${{ steps.pa11y_output.outputs.content }};
+            console.log(${{ steps.pa11y_output.outputs.content }});
+            const message = "Hello pa11y";
             const { issue: { number: issue_number }, repo: { owner, repo }  } = context;
             github.issues.createComment({ issue_number, owner, repo, body: message });
 
