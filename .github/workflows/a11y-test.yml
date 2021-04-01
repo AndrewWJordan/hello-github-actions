@@ -25,14 +25,16 @@ jobs:
           path: a11y/pa11y_output.txt
 
       - name: Comment on pull request.
-        uses: actions/github-script@0.3.0
+        uses: actions/github-script@v3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            console.log(${{ steps.pa11y_output.outputs.content }});
-            const message = "Hello pa11y";
-            const { issue: { number: issue_number }, repo: { owner, repo }  } = context;
-            github.issues.createComment({ issue_number, owner, repo, body: message });
+            github.issues.createComment({ 
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Hello!'
+            })
 
       - name: Check for pa11y failures.
         if: contains(steps.pa11y_output.outputs.content, 'errno 2')
